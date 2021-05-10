@@ -1,1 +1,1 @@
-web: node testForCitylink.js
+app: node testForCitylink.js
