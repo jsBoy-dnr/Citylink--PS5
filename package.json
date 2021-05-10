@@ -4,7 +4,7 @@
   "description": "",
   "main": "testForCitylink.js",
   "scripts": {
-    "start": "node testForCitylink"
+    "start": "node testForCitylink.js"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +14,8 @@
     "jsdom": "^16.5.3",
     "proxy-chain": "^1.0.2",
     "puppeteer": "^9.1.1"
+  },
+  "engines": {
+    "node": "13.14.0"
   }
 }
