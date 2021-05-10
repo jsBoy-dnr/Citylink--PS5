@@ -28,7 +28,7 @@ async function getNewConection(gotolink, city) {
         headless: true,
         slowMo: 300,
         devtools: false,
-        args: ['--no-sandbox', `--proxy-server=${newProxyUrl}`]
+        args: ['--no-sandbox', '--disable-setuid-sandbox', `--proxy-server=${newProxyUrl}`]
     })
     let page = await browser.newPage()
     await page.setViewport({
