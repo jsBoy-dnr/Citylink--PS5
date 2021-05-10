@@ -25,7 +25,7 @@ async function getNewConection(gotolink, city) {
     const newProxyUrl = await proxyChain.anonymizeProxy(getProxy())
     let browser = await puppeteer.launch({
         ignoreHTTPSErrors: true,
-        headless: false,
+        headless: true,
         slowMo: 300,
         devtools: false,
         args: [`--proxy-server=${newProxyUrl}`]
