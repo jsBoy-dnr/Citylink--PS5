@@ -1,10 +1,15 @@
 const jsdom = require("jsdom")
+const axios = require('axios');
 var getNewConection = require('./getNewConection.js')
 const { JSDOM } = jsdom
 function randomInteger(min, max) {
     // случайное число от min до (max+1)
     let rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
+}
+async function addLog(Smess, Smonitor) {
+    let post = { mess: Smess, monitor: Smonitor};
+    let res = await axios.post('https://e-mobi.com.ru/monitors/api_addlog.php', post);
 }
 async function getProducts(connection, link, keywords, city) {
     let condition = true
@@ -23,8 +28,10 @@ async function getProducts(connection, link, keywords, city) {
                 keywords.forEach(function (keyword, p, arrkeys) {
                     if (productName.indexOf(keyword) >= 0) {
                         console.log('Нужный товар найден!!');
+                        let productLink = item.querySelector('a.ProductCardVertical__name').href
+                        addLog(`Обнаружен товар ${productName}, ссылка ${productLink}`, 1);
                         console.log(productName);
-                        console.log(item.querySelector('a.ProductCardVertical__name').href);
+                        console.log(productLink);
                         console.log('----------');
                     }
                 })

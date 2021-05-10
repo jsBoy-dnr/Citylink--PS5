@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "jsdom": "^16.5.3",
     "proxy-chain": "^1.0.2",
     "puppeteer": "^9.1.1"
