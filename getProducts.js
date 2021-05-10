@@ -7,8 +7,8 @@ function randomInteger(min, max) {
     let rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
 }
-async function addLog(Smess, Smonitor) {
-    let post = { mess: Smess, monitor: Smonitor};
+async function addLog(Smess, Smonitor, StableType) {
+    let post = { mess: Smess, monitor: Smonitor, tabletype: StableType};
     let res = await axios.post('https://e-mobi.com.ru/monitors/api_addlog.php', post);
 }
 async function getProducts(connection, link, keywords, city) {
@@ -20,6 +20,7 @@ async function getProducts(connection, link, keywords, city) {
     let dom = new JSDOM(html)
     console.log('Забираю и анализирую товары');
     if(dom.window.document.querySelectorAll('section.GroupGrid')) {
+        addLog(`Запрос на список товара`, 1, 'logs');
         let ProductsList = dom.window.document.querySelectorAll('section.GroupGrid .product_data__pageevents-js')
         console.log('Обнаружил - '+ProductsList.length+' товара');
         ProductsList.forEach(function (item, i, arr) {
@@ -29,7 +30,7 @@ async function getProducts(connection, link, keywords, city) {
                     if (productName.indexOf(keyword) >= 0) {
                         console.log('Нужный товар найден!!');
                         let productLink = item.querySelector('a.ProductCardVertical__name').href
-                        addLog(`Обнаружен товар ${productName}, ссылка ${productLink}`, 1);
+                        addLog(`Обнаружен товар ${productName}, ссылка ${productLink}`, 1, 'search');
                         console.log(productName);
                         console.log(productLink);
                         console.log('----------');
