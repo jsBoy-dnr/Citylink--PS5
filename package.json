@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "testForCitylink.js",
+  "scripts": {
+    "test": "node testForCitylink.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^16.5.3",
+    "proxy-chain": "^1.0.2",
+    "puppeteer": "^9.1.1"
+  }
+}
