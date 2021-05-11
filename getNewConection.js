@@ -25,7 +25,7 @@ async function getNewConection(gotolink, city) {
     const newProxyUrl = await proxyChain.anonymizeProxy(getProxy())
     let browser = await puppeteer.launch({
         ignoreHTTPSErrors: true,
-        headless: true,
+        headless: false,
         slowMo: 300,
         devtools: false,
         args: ['--no-sandbox', '--disable-setuid-sandbox', `--proxy-server=${newProxyUrl}`]
@@ -35,7 +35,11 @@ async function getNewConection(gotolink, city) {
         width: 1400, height: 800
     })
     await page.setDefaultNavigationTimeout(0);
-    await page.goto(gotolink, {waitUntil: 'networkidle0'})
+    await Promise.all([
+        await page.goto(gotolink, {waitUntil: 'networkidle0'}),
+        page.waitForSelector('.MainHeader__city'),
+    ]);
+
     await citySelect(page, city)
     connection.browser = browser
     connection.page = page

@@ -6,8 +6,9 @@ const data = {
         'https://www.citilink.ru/catalog/igrovye-pristavki/?f=discount.any&pf=discount.any&pprice_min=40000&price_min=15000'
     ],
     keywords: [
-        'желтый',
-        'серый'
+        'playstation',
+        'series',
+        'коралловый'
     ]
 }
 //let arr = [

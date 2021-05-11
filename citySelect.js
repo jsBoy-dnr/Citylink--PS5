@@ -1,7 +1,7 @@
 async function citySelect(page, city) {
     console.log('Выбираю нужный город');
     await page.click('.MainHeader__city > button');
-    await page.waitForTimeout(800)
+    await page.waitForTimeout(1500)
     await page.click(`a[data-search="${city}"]`)
     await page.waitForTimeout(1000)
 

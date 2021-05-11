@@ -7,8 +7,8 @@ function randomInteger(min, max) {
     let rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
 }
-async function addLog(Smess, Smonitor, StableType) {
-    let post = { mess: Smess, monitor: Smonitor, tabletype: StableType};
+async function addLog(Smess, Smonitor, StableType, Sname='', Slink='', Simg='', Sprice=0) {
+    let post = { mess: Smess, monitor: Smonitor, tabletype: StableType, pname: Sname, plink: Slink, pimg: Simg, pprice: Sprice};
     let res = await axios.post('https://e-mobi.com.ru/monitors/api_addlog.php', post);
 }
 async function getProducts(connection, link, keywords, city) {
@@ -30,7 +30,23 @@ async function getProducts(connection, link, keywords, city) {
                     if (productName.indexOf(keyword) >= 0) {
                         console.log('Нужный товар найден!!');
                         let productLink = item.querySelector('a.ProductCardVertical__name').href
-                        addLog(`Обнаружен товар ${productName}, ссылка ${productLink}`, 1, 'search');
+                        let productPrice = item.querySelector('span.ProductCardVerticalPrice__price-current_current-price').textContent
+                        productPrice = productPrice.replace(/[^+\d]/g, '')
+                        let productImg = item.querySelector('img.ProductCardVertical__picture').src
+                        console.log('***********')
+                        console.log(productName)
+                        console.log(productLink)
+                        console.log(productImg)
+                        console.log(productPrice)
+                        console.log('***********')
+                        addLog(
+                        `Обнаружен товар ${productName}, ссылка ${productLink}`,
+                         1,
+                         'search',
+                            productName,
+                            productLink,
+                            productImg,
+                            productPrice);
                         console.log(productName);
                         console.log(productLink);
                         console.log('----------');
